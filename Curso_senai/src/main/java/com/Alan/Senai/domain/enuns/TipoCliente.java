@@ -15,27 +15,27 @@ public enum TipoCliente {
 
 	// getter, não necessita set pois é imutavel
 	public int getCod() {
-		return cod;// puxa o codigo
+		return cod;
 	}
 
 	public String getDescricao() {
-		return descricao;// puxa a descricao
+		return descricao;
 	}
 
-	// condicional do cod
 	public static TipoCliente toEnum(Integer cod) {
 		// se receber vazio , retorna vazio
-		if  (cod == null) {
+		if (cod == null) {
 			return null;
 		}
-		//se não, percorre todos os valores do TipoCliente
-		for (TipoCliente x: TipoCliente.values()) {
-			//se o codigo corresponder a um dos dois estaticos definidos, retorna o codigo
-			if(cod.equals(x.getCod())){
+		// se não, percorre todos os valores do TipoCliente
+		for (TipoCliente x : TipoCliente.values()) {
+			// se o codigo corresponder a um dos dois estaticos definidos, retorna o codigo
+			if (cod.equals(x.getCod())) {
 				return x;
 			}
 		}
-		//caso digitar um codigo invalido
-		throw new IllegalArgumentException("O id digitado é invalido->"+cod);
+		// caso digitar um codigo invalido
+		throw new IllegalArgumentException("O id digitado é invalido->" + cod);
 	}
+
 }

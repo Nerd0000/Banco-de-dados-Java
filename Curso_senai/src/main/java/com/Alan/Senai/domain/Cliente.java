@@ -12,9 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.Alan.Senai.domain.enuns.TipoCliente;
+
 @Entity // <-avisa ao JPA q será uma tabela e ja importa o framework
 public class Cliente implements Serializable {
-	private static final long seriaLVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Id // <-avisa que o atributo será um id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,7 @@ public class Cliente implements Serializable {
 	private Integer idCliente;
 	private String nome;
 	private String CpfOuCnpj;
+	private Integer tipo;/* será usado no enum */
 	// O banco não deixa os dados se repetirem
 	@Column(unique = true)
 	private String email;
@@ -31,90 +34,57 @@ public class Cliente implements Serializable {
 	private Set<String> telefones = new HashSet<>();
 
 	// Construtor
-	public Cliente() {
-	}
-
-	/**
-	 * @param idCliente
-	 * @param nome
-	 * @param cpfOuCnpj
-	 * @param email
-	 */
-	public Cliente(Integer idCliente, String nome, String cpfOuCnpj, String email) {
+	public Cliente(Integer idCliente, String nome, String cpfOuCnpj, String email, TipoCliente tipo) {
 		super();
 		this.idCliente = idCliente;
 		this.nome = nome;
 		this.CpfOuCnpj = cpfOuCnpj;
 		this.email = email;
+		// não vai telefone
+		this.tipo = tipo.getCod();/* busca o cod na classe */
 	}
 
-	// gets and setters
-	/**
-	 * @return the idCliente
-	 */
-	public Integer getIdCliente() {
-		return idCliente;
+	// gets e setters
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);// puxa da classe enum
 	}
 
-	/**
-	 * @param idCliente the idCliente to set
-	 */
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
+	}
+
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	/**
-	 * @return the nome
-	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * @param nome the nome to set
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return the cpfOuCnpj
-	 */
 	public String getCpfOuCnpj() {
 		return CpfOuCnpj;
 	}
 
-	/**
-	 * @param cpfOuCnpj the cpfOuCnpj to set
-	 */
 	public void setCpfOuCnpj(String cpfOuCnpj) {
 		CpfOuCnpj = cpfOuCnpj;
 	}
 
-	/**
-	 * @return the email
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return the telefones
-	 */
 	public Set<String> getTelefones() {
 		return telefones;
 	}
 
-	/**
-	 * @param telefones the telefones to set
-	 */
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
