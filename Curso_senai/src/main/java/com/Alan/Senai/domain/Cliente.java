@@ -39,6 +39,14 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "Telefone") // nome da tabela vai nas " "
 	private Set<String> telefones = new HashSet<>();
 
+	// ----Relacionamento das classes(Cliente e Endereço)----
+	@OneToMany// <-indica o tipo do relacionamento(um para muitos)
+	// cascade é para: se excluir cliente, o endereço tbm é excluido
+	(mappedBy = "cliente", cascade = CascadeType.ALL)
+	// ^-salvo tudo que foi pegado na linha acima em uma lista-v
+	private List<Endereco> enderecos = new ArrayList<>();
+	// -----------------------------------------------------
+
 	// Construtor
 	public Cliente(Integer idCliente, String nome, String cpfOuCnpj, String email, TipoCliente tipo) {
 		super();
@@ -95,7 +103,15 @@ public class Cliente implements Serializable {
 		this.telefones = telefones;
 	}
 
-	// id de auto incremento com valor unico
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	// hashCode e Equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -120,23 +136,4 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
-	/*----Relacionamento das classes(Cliente e Endereço)----*/
-	@OneToMany// indica o tipo do relacionamento(um para muitos)
-	// cascade é para: se excluir cliente, o endereço tbm é excluido
-	(mappedBy = "cliente", cascade = CascadeType.ALL)
-	// ^-salvo tudo que foi pegado na linha acima em uma lista-v
-	private List<Endereco> enderecos = new ArrayList<>();
-
-	/*-----------------------------------------------------*/
-	// get e set
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-	// hashCode e equals
-	
 }
