@@ -18,25 +18,30 @@ public class Endereco implements Serializable {
 
 	@Id // <-avisa que o atributo será um id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	// Atributos viram campos na tabela
 	private Integer id;
-
 	private String logradouro;
 	private String numero;
 	private String complemento;
 	private String bairro;
 	private String cep;
 
-	/* V--Relacionamento das classes(Endereço e Cliente)--V */
+	// -----Relacionamento das classes(Endereço e Cliente)
 	@JsonIgnore // evita que o relacionamento entre em loop infinito e estoure a memoria
 	@ManyToOne // indica o tipo do relacionamento(muitos para um)
 	@JoinColumn(name = "cliente_id") // será a coluna a ser gerada em nossa tabela
 	private Cliente cliente;// puxa a instancia da classe Cliente
-	/*---------------------------------------------------*/
-	// construtor
 
+	// Endereco conhece a cidade, mas a cidade não conhece o endereço
+	@ManyToOne // indica o tipo do relacionamento(muitos para um)
+	@JoinColumn(name = "cidade_id") // será a coluna a ser gerada em nossa tabela
+	private Cidade cidade;// puxa a instancia da classe Cidade
+	// ---------------------------------------------------
+
+	// construtor
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
-			Cliente cliente) {
+			Cliente cliente, Cidade cidade) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -45,10 +50,10 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cliente = cliente;
+		this.cidade = cidade;
 	}
 
 	// gets e sets
-
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -104,6 +109,14 @@ public class Endereco implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
 
 	// HashCode e Equals
 	@Override
@@ -130,5 +143,4 @@ public class Endereco implements Serializable {
 			return false;
 		return true;
 	}
-
 }
