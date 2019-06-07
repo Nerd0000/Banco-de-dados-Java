@@ -2,6 +2,7 @@ package com.Alan.Senai.domain.enuns;
 
 public enum TipoCliente {
 	// Será nosso estatico, que não ira mudar
+	// O enum so permite a escolha de um dos campos declarados abaixo
 	PESSOAFISICA(1, "Pessoa Física"), PESSOAJURIDICA(2, "Pessoa Jurídica");
 	// Nossos atributos
 	private int cod;
