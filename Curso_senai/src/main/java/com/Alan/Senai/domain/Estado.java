@@ -19,7 +19,7 @@ public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id // <-avisa que o atributo será um id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//gera o id
 	// Atributos viram campos na tabela
 	private Integer id;
 	private String nome;
