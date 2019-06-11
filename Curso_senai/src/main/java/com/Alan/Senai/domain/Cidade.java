@@ -22,7 +22,7 @@ public class Cidade implements Serializable {
 	private String nome;
 	// ---------------Relacionamento cidade<->estado--------------------
 	@ManyToOne // indica o tipo do relacionamento(muitos para um)
-	@JoinColumn(name = "estado id") // será a coluna a ser gerada em nossa tabela da relação
+	@JoinColumn(name = "estado_id") // será a coluna a ser gerada em nossa tabela da relação
 	private Estado estado;// puxa a instancia da classe Estado
 	// construtor vazio
 
