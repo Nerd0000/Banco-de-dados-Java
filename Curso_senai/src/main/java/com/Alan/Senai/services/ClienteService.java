@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.Alan.Senai.domain.Cliente;
 import com.Alan.Senai.repositories.ClienteRepository;
+import com.Alan.Senai.repositories.EnderecoRepository;
 import com.Alan.Senai.services.exceptions.ObjectNotFoundException;
 
 @Service // cuida da manipulação dos dados pela web
 public class ClienteService {
 	@Autowired // instacia do repositorio que tem DML(manipulação de dados)
 	private ClienteRepository repo;// repo - objeto criado
-
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	// faz a busca do cliente pelo id
 	public Cliente buscar(Integer idCliente) {
 		// Optional para que não de NullPointerException
@@ -27,5 +30,13 @@ public class ClienteService {
 	// busca todos os clientes
 	public List<Cliente> findAll() {
 		return repo.findAll();
+	}
+	
+	//insere um endereço em cliente
+	public Cliente insert(Cliente obj) {
+		obj.setIdCliente(null);
+		obj = repo.save(obj);
+		enderecoRepository.saveAll(obj.getEnderecos());
+		return obj;
 	}
 }

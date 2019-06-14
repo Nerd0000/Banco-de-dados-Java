@@ -66,6 +66,9 @@ public class Cliente implements Serializable {
 	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo.getCod();
 	}
+	public Integer getIdCliente() {
+		return idCliente;
+	}
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
