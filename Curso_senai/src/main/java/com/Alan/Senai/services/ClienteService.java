@@ -1,5 +1,6 @@
 package com.Alan.Senai.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,17 @@ public class ClienteService {
 	@Autowired // instacia do repositorio que tem DML(manipulação de dados)
 	private ClienteRepository repo;// repo - objeto criado
 
-	// faz a busca do cliente
+	// faz a busca do cliente pelo id
 	public Cliente buscar(Integer idCliente) {
 		// Optional para que não de NullPointerException
 		Optional<Cliente> obj = repo.findById(idCliente);
 		// me retorna uma mensagem de erro
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"núnero do id não encontrado: " + idCliente + " tipo: " + Cliente.class.getName()));
+	}
+	
+	// busca todos os clientes
+	public List<Cliente> findAll() {
+		return repo.findAll();
 	}
 }

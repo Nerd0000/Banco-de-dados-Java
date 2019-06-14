@@ -1,5 +1,7 @@
 package com.Alan.Senai.resources;//Esse pacote lida com a transmissão de tudo que foi criado no backEnd para o Front
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,5 +22,11 @@ public class ClienteResource {
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {// responde cliente do domain e tranforma o id em url
 		Cliente obj = service.buscar(id);// pega o id
 		return ResponseEntity.ok().body(obj);// retorna no corpo do objeto todas as informações
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Cliente>>findAll(){
+		List<Cliente> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 }
