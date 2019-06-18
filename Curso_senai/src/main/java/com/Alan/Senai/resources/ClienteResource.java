@@ -52,4 +52,11 @@ public class ClienteResource {
 		obj = service.update(obj);// service criado no ClienteService
 		return ResponseEntity.noContent().build();
 	}
+	
+	// deletar cliente
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

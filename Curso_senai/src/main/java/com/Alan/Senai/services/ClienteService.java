@@ -46,4 +46,10 @@ public class ClienteService {
 		buscar(obj.getIdCliente());
 		return repo.save(obj);
 	}
+	
+	// deleta um cliente
+	public void delete(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+	}
 }
