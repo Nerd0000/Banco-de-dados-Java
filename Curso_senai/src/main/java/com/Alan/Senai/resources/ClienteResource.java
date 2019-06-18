@@ -38,10 +38,18 @@ public class ClienteResource {
 	// insere valor
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Cliente obj) {// puxa a resposta vazia e
-		obj = service.insert(obj);//insere uma valida na requisição
-		//--Uri e o trabalho de browser para enviar para o backend
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getIdCliente()).toUri();
+		obj = service.insert(obj);// insere uma valida na requisição
+		// --Uri e o trabalho de browser para enviar para o backend
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdCliente())
+				.toUri();
 		return ResponseEntity.created(uri).build();
+	}
+
+	// atualizar cliente
+	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Cliente obj, @PathVariable Integer id){
+		obj.setIdCliente(id);// id do objeto que será alterado
+		obj = service.update(obj);// service criado no ClienteService
+		return ResponseEntity.noContent().build();
 	}
 }

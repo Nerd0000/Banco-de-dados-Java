@@ -17,7 +17,7 @@ public class ClienteService {
 	private ClienteRepository repo;// repo - objeto criado
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	// faz a busca do cliente pelo id
 	public Cliente buscar(Integer idCliente) {
 		// Optional para que não de NullPointerException
@@ -26,17 +26,24 @@ public class ClienteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"núnero do id não encontrado: " + idCliente + " tipo: " + Cliente.class.getName()));
 	}
-	
+
 	// busca todos os clientes
 	public List<Cliente> findAll() {
 		return repo.findAll();
 	}
-	
-	//insere um endereço em cliente
+
+	// insere um endereço em cliente
 	public Cliente insert(Cliente obj) {
 		obj.setIdCliente(null);
 		obj = repo.save(obj);
 		enderecoRepository.saveAll(obj.getEnderecos());
 		return obj;
+	}
+
+	// atualiza um cliente
+	public Cliente update(Cliente obj) {
+		// busca o cliente a ser atualizado
+		buscar(obj.getIdCliente());
+		return repo.save(obj);
 	}
 }

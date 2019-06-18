@@ -40,6 +40,8 @@ public class Endereco implements Serializable {
 	// ---------------------------------------------------
 
 	// construtor
+	public Endereco() {
+	}
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Cliente cliente, Cidade cidade) {
 		super();
